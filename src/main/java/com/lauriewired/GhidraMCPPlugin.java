@@ -1540,13 +1540,13 @@ public class GhidraMCPPlugin extends Plugin {
         if (query != null) {
             String[] pairs = query.split("&");
             for (String p : pairs) {
-                String[] kv = p.split("=");
-                if (kv.length == 2) {
-                    // URL decode parameter values
-                    try {
-                        String key = URLDecoder.decode(kv[0], StandardCharsets.UTF_8);
-                        String value = URLDecoder.decode(kv[1], StandardCharsets.UTF_8);
-                        result.put(key, value);
+            String[] kv = p.split("=", 2);
+            if (kv.length == 2) {
+                // URL decode parameter values
+                try {
+                    String key = URLDecoder.decode(kv[0], StandardCharsets.UTF_8);
+                    String value = URLDecoder.decode(kv[1], StandardCharsets.UTF_8);
+                    result.put(key, value);
                     } catch (Exception e) {
                         Msg.error(this, "Error decoding URL parameter", e);
                     }
@@ -1564,7 +1564,7 @@ public class GhidraMCPPlugin extends Plugin {
         String bodyStr = new String(body, StandardCharsets.UTF_8);
         Map<String, String> params = new HashMap<>();
         for (String pair : bodyStr.split("&")) {
-            String[] kv = pair.split("=");
+            String[] kv = pair.split("=", 2);
             if (kv.length == 2) {
                 // URL decode parameter values
                 try {
